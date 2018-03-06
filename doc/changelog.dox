@@ -170,6 +170,8 @@ See also:
     libraries as well. If using CMake, these dependencies might get linked in
     transitively from other libraries, but that doesn't handle all cases. Due
     to the complexity of this change, no backwards compatibility is provided.
+-   The `magnum-info` utility was renamed to @ref magnum-gl-info. No backwards
+    compatibility symlinks or aliases are provided.
 -   Removed `PixelStorage::setSwapBytes()`, as every Magnum API dealing with
     images basically only asserted that it's not set. Use
     @ref Corrade::Utility::Endianness instead.
@@ -518,7 +520,7 @@ a high-level overview.
 -   New @ref Platform::WindowlessGlxContext "Platform::Windowless*Context"
     classes that manage OpenGL context to make threaded context creation
     possible
--   Ported @ref magnum-info "magnum-info" to Emscripten
+-   Ported @ref magnum-gl-info "magnum-info" to Emscripten
 -   First-class support for scroll events in
     @ref Platform::Sdl2Application::MouseScrollEvent (see
     [mosra/magnum#157](https://github.com/mosra/magnum/pull/157))
@@ -545,7 +547,8 @@ a high-level overview.
     for iOS and macOS
 -   Added @ref Platform::WindowlessGlxApplication::Configuration::setFlags() "Platform::Windowless*Application::Configuration::setFlags()" with
     @ref Platform::WindowlessGlxApplication::Configuration::Flag::Debug "Flag::Debug"
--   @ref magnum-info now accepts `--short` and `--extension-strings` options
+-   @ref magnum-gl-info "magnum-info" now accepts `--short` and
+    `--extension-strings` options
 -   Added @ref Platform::Sdl2Application::windowSize(),
     @ref Platform::GlfwApplication::windowSize()
 -   Extended @ref Platform::Sdl2Application::KeyEvent::Key to be consistent
@@ -1190,8 +1193,8 @@ for a high-level overview.
     for more information
 -   Initial implementation of @ref Platform::AndroidApplication class
 -   @ref Platform::WindowlessWglApplication and @ref Platform::WindowlessCglApplication,
-    which enable @ref magnum-info, @ref magnum-distancefieldconverter and
-    @ref magnum-fontconverter utilities on OS X and Windows. See
+    which enable @ref magnum-info "magnum-gl-info", @ref magnum-distancefieldconverter
+    and @ref magnum-fontconverter utilities on OS X and Windows. See
     [mosra/magnum#40](https://github.com/mosra/magnum/issues/40) and
     [mosra/magnum#59](https://github.com/mosra/magnum/pull/59).
 -   @ref Trade::ObjImporter "ObjImporter" plugin, mesh import only (no
@@ -1227,11 +1230,11 @@ for a high-level overview.
     GL
 -   Support for specifying context flags using
     @ref Platform::Sdl2Application::Configuration::setFlags() "Platform::*Application::Configuration::setFlags()",
-    they are now also shown in @ref magnum-info
+    they are now also shown in @ref magnum-gl-info "magnum-info"
 -   More robust support for driver detection and driver bug workarounds. Driver
     can be detected using @ref Context::detectedDriver(), problematic
-    extension disabled, which is then shown in @ref magnum-info and can be
-    also queried using @ref Context::isExtensionDisabled()
+    extension disabled, which is then shown in @ref magnum-info "magnum-info"
+    and can be also queried using @ref Context::isExtensionDisabled()
 -   @ref Context::extensionStrings() for getting list of all extension
     strings exposed by the driver
 -   @ref Context::resetState() for resetting internal state tracker, allowing
@@ -1577,7 +1580,7 @@ for a high-level overview.
     Magnum namespace. Note that template aliases are not present in GCC 4.6
     builds.
 -   Limit queries for all OpenGL objects, the information is now printed also
-    by @ref magnum-info utility.
+    by @ref magnum-gl-info "magnum-info" utility.
 -   @ref Context::isExtensionSupported() is now able to query extension
     availability on particular GLSL version
 -   Using @ref std::unique_ptr and C++1y @cpp std::optional @ce for resources
