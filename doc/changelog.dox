@@ -161,6 +161,11 @@ See also:
 
 @subsection changelog-latest-compatibility Potential compatibility breakages, removed APIs
 
+-   Code that was previously linking just to the core @ref Magnum library may
+    now need to explicitly link to the @ref Magnum::Trade and @ref Magnum::GL
+    libraries as well. If using CMake, these dependencies might get linked in
+    transitively from other libraries, but that doesn't handle all cases. Due
+    to the complexity of this change, no backwards compatibility is provided.
 -   Removed `PixelStorage::setSwapBytes()`, as every Magnum API dealing with
     images basically only asserted that it's not set. Use
     @ref Corrade::Utility::Endianness instead.
