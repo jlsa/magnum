@@ -27,7 +27,7 @@
 
 #ifndef MAGNUM_TARGET_WEBGL
 /** @file
- * @brief Class @ref Magnum::DebugOutput, @ref Magnum::DebugMessage, @ref Magnum::DebugGroup
+ * @brief Class @ref Magnum::GL::DebugOutput, @ref Magnum::GL::DebugMessage, @ref Magnum::GL::DebugGroup
  */
 #endif
 
@@ -39,7 +39,7 @@
 #include "Magnum/GL/visibility.h"
 
 #ifndef MAGNUM_TARGET_WEBGL
-namespace Magnum {
+namespace Magnum { namespace GL {
 
 namespace Implementation { struct DebugState; }
 
@@ -412,13 +412,13 @@ class MAGNUM_GL_EXPORT DebugOutput {
         #endif
 };
 
-/** @debugoperatorclassenum{Magnum::DebugOutput,Magnum::DebugOutput::Source} */
+/** @debugoperatorclassenum{DebugOutput,DebugOutput::Source} */
 MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, DebugOutput::Source value);
 
-/** @debugoperatorclassenum{Magnum::DebugOutput,Magnum::DebugOutput::Type} */
+/** @debugoperatorclassenum{DebugOutput,DebugOutput::Type} */
 MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, DebugOutput::Type value);
 
-/** @debugoperatorclassenum{Magnum::DebugOutput,Magnum::DebugOutput::Severity} */
+/** @debugoperatorclassenum{DebugOutput,DebugOutput::Severity} */
 MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, DebugOutput::Severity value);
 
 /**
@@ -595,10 +595,10 @@ class MAGNUM_GL_EXPORT DebugMessage {
         #endif
 };
 
-/** @debugoperatorclassenum{Magnum::DebugMessage,Magnum::DebugMessage::Source} */
+/** @debugoperatorclassenum{DebugMessage,DebugMessage::Source} */
 MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, DebugMessage::Source value);
 
-/** @debugoperatorclassenum{Magnum::DebugMessage,Magnum::DebugMessage::Type} */
+/** @debugoperatorclassenum{DebugMessage,DebugMessage::Type} */
 MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, DebugMessage::Type value);
 
 /**
@@ -802,10 +802,10 @@ class MAGNUM_GL_EXPORT DebugGroup {
         bool _active;
 };
 
-/** @debugoperatorclassenum{Magnum::DebugGroup,Magnum::DebugGroup::Source} */
+/** @debugoperatorclassenum{DebugGroup,DebugGroup::Source} */
 MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, DebugGroup::Source value);
 
-}
+}}
 #else
 #error this header is not available in WebGL build
 #endif

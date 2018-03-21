@@ -26,7 +26,7 @@
 */
 
 /** @file
- * @brief Class @ref Magnum::Renderbuffer
+ * @brief Class @ref Magnum::GL::Renderbuffer
  */
 
 #include <Corrade/Containers/ArrayView.h>
@@ -35,7 +35,7 @@
 #include "Magnum/GL/GL.h"
 #include "Magnum/GL/Tags.h"
 
-namespace Magnum {
+namespace Magnum { namespace GL {
 
 namespace Implementation { struct FramebufferState; }
 
@@ -302,6 +302,6 @@ inline GLuint Renderbuffer::release() {
     return id;
 }
 
-}
+}}
 
 #endif

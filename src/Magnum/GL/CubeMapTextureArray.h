@@ -36,7 +36,7 @@
 #include "Magnum/Math/Vector3.h"
 
 #if !defined(MAGNUM_TARGET_GLES2) && !defined(MAGNUM_TARGET_WEBGL)
-namespace Magnum {
+namespace Magnum { namespace GL {
 
 /**
 @brief Cube map texture array
@@ -779,7 +779,7 @@ class MAGNUM_GL_EXPORT CubeMapTextureArray: public AbstractTexture {
         explicit CubeMapTextureArray(GLuint id, ObjectFlags flags) noexcept: AbstractTexture{id, GL_TEXTURE_CUBE_MAP_ARRAY, flags} {}
 };
 
-}
+}}
 #else
 #error this header is not available in OpenGL ES 2.0 and WebGL build
 #endif

@@ -26,7 +26,7 @@
 */
 
 /** @file
- * @brief Class @ref Magnum::Mesh
+ * @brief Class @ref Magnum::GL::Mesh
  */
 
 #include <vector>
@@ -38,7 +38,7 @@
 #include "Magnum/GL/GL.h"
 #include "Magnum/GL/Tags.h"
 
-namespace Magnum {
+namespace Magnum { namespace GL {
 
 /**
  * @brief Mesh primitive type
@@ -985,10 +985,10 @@ class MAGNUM_GL_EXPORT Mesh: public AbstractObject {
         std::vector<AttributeLayout> _attributes;
 };
 
-/** @debugoperatorenum{Magnum::MeshPrimitive} */
+/** @debugoperatorenum{MeshPrimitive} */
 MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, MeshPrimitive value);
 
-/** @debugoperatorclassenum{Magnum::Mesh,Magnum::Mesh::IndexType} */
+/** @debugoperatorclassenum{Mesh,Mesh::IndexType} */
 MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, Mesh::IndexType value);
 
 inline GLuint Mesh::release() {
@@ -997,12 +997,12 @@ inline GLuint Mesh::release() {
     return id;
 }
 
-}
+}}
 
 namespace Corrade { namespace Utility {
 
 /** @configurationvalue{Magnum::MeshPrimitive} */
-template<> struct MAGNUM_GL_EXPORT ConfigurationValue<Magnum::MeshPrimitive> {
+template<> struct MAGNUM_GL_EXPORT ConfigurationValue<Magnum::GL::MeshPrimitive> {
     ConfigurationValue() = delete;
 
     /**
@@ -1010,18 +1010,18 @@ template<> struct MAGNUM_GL_EXPORT ConfigurationValue<Magnum::MeshPrimitive> {
      *
      * If the value is invalid, returns empty string.
      */
-    static std::string toString(Magnum::MeshPrimitive value, ConfigurationValueFlags);
+    static std::string toString(Magnum::GL::MeshPrimitive value, ConfigurationValueFlags);
 
     /**
      * @brief Reads enum value as string
      *
      * If the value is invalid, returns @ref Magnum::MeshPrimitive::Points "MeshPrimitive::Points".
      */
-    static Magnum::MeshPrimitive fromString(const std::string& stringValue, ConfigurationValueFlags);
+    static Magnum::GL::MeshPrimitive fromString(const std::string& stringValue, ConfigurationValueFlags);
 };
 
 /** @configurationvalue{Magnum::Mesh::IndexType} */
-template<> struct MAGNUM_GL_EXPORT ConfigurationValue<Magnum::Mesh::IndexType> {
+template<> struct MAGNUM_GL_EXPORT ConfigurationValue<Magnum::GL::Mesh::IndexType> {
     ConfigurationValue() = delete;
 
     /**
@@ -1029,14 +1029,14 @@ template<> struct MAGNUM_GL_EXPORT ConfigurationValue<Magnum::Mesh::IndexType> {
      *
      * If the value is invalid, returns empty string.
      */
-    static std::string toString(Magnum::Mesh::IndexType value, ConfigurationValueFlags);
+    static std::string toString(Magnum::GL::Mesh::IndexType value, ConfigurationValueFlags);
 
     /**
      * @brief Read enum value as string
      *
      * If the value is invalid, returns @ref Magnum::Mesh::IndexType::UnsignedInt "Mesh::IndexType::UnsignedInt".
      */
-    static Magnum::Mesh::IndexType fromString(const std::string& stringValue, ConfigurationValueFlags);
+    static Magnum::GL::Mesh::IndexType fromString(const std::string& stringValue, ConfigurationValueFlags);
 };
 
 }}

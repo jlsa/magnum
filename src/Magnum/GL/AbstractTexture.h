@@ -26,7 +26,7 @@
 */
 
 /** @file
- * @brief Class @ref Magnum::AbstractTexture
+ * @brief Class @ref Magnum::GL::AbstractTexture
  */
 
 #include <Corrade/Containers/ArrayView.h>
@@ -37,7 +37,7 @@
 #include "Magnum/GL/Sampler.h"
 #include "Magnum/GL/Tags.h"
 
-namespace Magnum {
+namespace Magnum { namespace GL {
 
 namespace Implementation {
     struct TextureState;
@@ -829,6 +829,6 @@ inline GLuint AbstractTexture::release() {
     return id;
 }
 
-}
+}}
 
 #endif

@@ -26,7 +26,7 @@
 */
 
 /** @file
- * @brief Class @ref Magnum::Texture, typedef @ref Magnum::Texture1D, @ref Magnum::Texture2D, @ref Magnum::Texture3D
+ * @brief Class @ref Magnum::GL::Texture, typedef @ref Magnum::GL::Texture1D, @ref Magnum::GL::Texture2D, @ref Magnum::GL::Texture3D
  */
 
 #include "Magnum/Array.h"
@@ -34,7 +34,7 @@
 #include "Magnum/GL/AbstractTexture.h"
 #include "Magnum/Math/Vector3.h"
 
-namespace Magnum {
+namespace Magnum { namespace GL {
 
 namespace Implementation {
     template<UnsignedInt> constexpr GLenum textureTarget();
@@ -1300,6 +1300,6 @@ typedef Texture<2> Texture2D;
 typedef Texture<3> Texture3D;
 #endif
 
-}
+}}
 
 #endif

@@ -27,7 +27,7 @@
 
 #if !defined(MAGNUM_TARGET_GLES2) && !defined(MAGNUM_TARGET_WEBGL)
 /** @file
- * @brief Class @ref Magnum::MultisampleTexture, typedef @ref Magnum::MultisampleTexture2D, @ref Magnum::MultisampleTexture2DArray
+ * @brief Class @ref Magnum::GL::MultisampleTexture, typedef @ref Magnum::GL::MultisampleTexture2D, @ref Magnum::GL::MultisampleTexture2DArray
  */
 #endif
 
@@ -36,7 +36,7 @@
 #include "Magnum/Math/Vector3.h"
 
 #if !defined(MAGNUM_TARGET_GLES2) && !defined(MAGNUM_TARGET_WEBGL)
-namespace Magnum {
+namespace Magnum { namespace GL {
 
 namespace Implementation {
     template<UnsignedInt> constexpr GLenum multisampleTextureTarget();
@@ -338,7 +338,7 @@ typedef MultisampleTexture<2> MultisampleTexture2D;
 */
 typedef MultisampleTexture<3> MultisampleTexture2DArray;
 
-}
+}}
 #else
 #error this header is not available in OpenGL ES 2.0 and WebGL build
 #endif

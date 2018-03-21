@@ -26,7 +26,7 @@
 */
 
 /** @file
- * @brief Class @ref Magnum::Buffer, enum @ref Magnum::BufferUsage
+ * @brief Class @ref Magnum::GL::Buffer, enum @ref Magnum::GL::BufferUsage
  */
 
 #include <cstddef>
@@ -45,7 +45,7 @@
 #include <Corrade/Utility/Macros.h>
 #endif
 
-namespace Magnum {
+namespace Magnum { namespace GL {
 
 /**
 @brief Buffer usage
@@ -1332,11 +1332,11 @@ class MAGNUM_GL_EXPORT Buffer: public AbstractObject {
 CORRADE_ENUMSET_OPERATORS(Buffer::MapFlags)
 #endif
 
-/** @debugoperatorclassenum{Magnum::Buffer,Magnum::Buffer::TargetHint} */
+/** @debugoperatorclassenum{Buffer,Buffer::TargetHint} */
 MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, Buffer::TargetHint value);
 
 #ifndef MAGNUM_TARGET_GLES2
-/** @debugoperatorclassenum{Magnum::Buffer,Magnum::Buffer::Target} */
+/** @debugoperatorclassenum{Buffer,Buffer::Target} */
 MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, Buffer::Target value);
 #endif
 
@@ -1381,6 +1381,6 @@ template<class T> Containers::Array<T> inline Buffer::subData(const GLintptr off
 #endif
 #endif
 
-}
+}}
 
 #endif

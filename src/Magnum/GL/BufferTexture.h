@@ -27,14 +27,14 @@
 
 #if !defined(MAGNUM_TARGET_GLES2) && !defined(MAGNUM_TARGET_WEBGL)
 /** @file
- * @brief Class @ref Magnum::BufferTexture
+ * @brief Class @ref Magnum::GL::BufferTexture
  */
 #endif
 
 #include "Magnum/GL/AbstractTexture.h"
 
 #if !defined(MAGNUM_TARGET_GLES2) && !defined(MAGNUM_TARGET_WEBGL)
-namespace Magnum {
+namespace Magnum { namespace GL {
 
 /**
 @brief Buffer texture
@@ -242,7 +242,7 @@ class MAGNUM_GL_EXPORT BufferTexture: public AbstractTexture {
         #endif
 };
 
-}
+}}
 #else
 #error this header is not available in OpenGL ES 2.0 and WebGL build
 #endif

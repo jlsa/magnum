@@ -24,7 +24,7 @@
 */
 
 /** @dir magnum/src/Magnum
- * @brief Namespace @ref Magnum (part of @ref building "Magnum library"), @ref Magnum::Extensions
+ * @brief Namespace @ref Magnum (part of @ref building "Magnum library")
  */
 /** @namespace Magnum
 @brief Root namespace
@@ -235,6 +235,29 @@ target_link_libraries(your-app Magnum::DebugTools)
 @endcode
 
 See @ref building, @ref cmake and @ref debug-tools for more information.
+*/
+
+/** @dir Magnum/GL
+ * @brief Namespace @ref Magnum::GL
+ */
+/** @namespace Magnum::GL
+@brief OpenGL wrapping layer
+
+C++11 wrappers around OpenGL objects with state tracking and transparent
+extension support.
+
+This library is built if `WITH_GL` is enabled when building Magnum. To use this
+library with CMake, you need to request the `GL` component of the `Magnum`
+package and link to the `Magnum::GL` target:
+
+@code{.cmake}
+find_package(Magnum REQUIRED GL)
+
+# ...
+target_link_libraries(your-app Magnum::GL)
+@endcode
+
+See @ref building, @ref cmake and @ref opengl for more information.
 */
 
 /** @dir Magnum/MeshTools

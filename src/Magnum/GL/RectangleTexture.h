@@ -27,7 +27,7 @@
 
 #ifndef MAGNUM_TARGET_GLES
 /** @file
- * @brief Class @ref Magnum::RectangleTexture
+ * @brief Class @ref Magnum::GL::RectangleTexture
  */
 #endif
 
@@ -36,7 +36,7 @@
 #include "Magnum/Math/Vector2.h"
 
 #ifndef MAGNUM_TARGET_GLES
-namespace Magnum {
+namespace Magnum { namespace GL {
 
 /**
 @brief Rectangle texture
@@ -609,7 +609,7 @@ class MAGNUM_GL_EXPORT RectangleTexture: public AbstractTexture {
         explicit RectangleTexture(GLuint id, ObjectFlags flags) noexcept: AbstractTexture{id, GL_TEXTURE_RECTANGLE, flags} {}
 };
 
-}
+}}
 #else
 #error this header is not available in OpenGL ES build
 #endif

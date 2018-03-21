@@ -26,7 +26,7 @@
 */
 
 /** @file
- * @brief Class @ref Magnum::AbstractShaderProgram
+ * @brief Class @ref Magnum::GL::AbstractShaderProgram
  */
 
 #include <functional>
@@ -42,7 +42,7 @@
 #include <vector>
 #endif
 
-namespace Magnum {
+namespace Magnum { namespace GL {
 
 namespace Implementation { struct ShaderProgramState; }
 
@@ -1300,6 +1300,6 @@ class MAGNUM_GL_EXPORT AbstractShaderProgram: public AbstractObject {
         #endif
 };
 
-}
+}}
 
 #endif

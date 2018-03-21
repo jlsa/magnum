@@ -26,7 +26,7 @@
 */
 
 /** @file
- * @brief Class @ref Magnum::Framebuffer
+ * @brief Class @ref Magnum::GL::Framebuffer
  */
 
 #include <Corrade/Containers/ArrayView.h>
@@ -38,7 +38,7 @@
 #undef Status
 #endif
 
-namespace Magnum {
+namespace Magnum { namespace GL {
 
 /**
 @brief Framebuffer
@@ -939,7 +939,7 @@ class MAGNUM_GL_EXPORT Framebuffer: public AbstractFramebuffer, public AbstractO
         #endif
 };
 
-/** @debugoperatorclassenum{Magnum::Framebuffer,Magnum::Framebuffer::Status} */
+/** @debugoperatorclassenum{Framebuffer,Framebuffer::Status} */
 MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, Framebuffer::Status value);
 
 inline Framebuffer::Framebuffer(Framebuffer&& other) noexcept {
@@ -964,6 +964,6 @@ inline GLuint Framebuffer::release() {
     return id;
 }
 
-}
+}}
 
 #endif
