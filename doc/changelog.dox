@@ -122,6 +122,11 @@ See also:
     @ref Magnum namespace were moved to @ref Magnum/GL directory and
     @ref Magnum::GL namespace. See their documentation for information about
     particular files, classes, enums, typedefs, values and functions.
+-   @ref PixelStorage::pixelSize() was deprecated, use @ref GL::pixelSize()
+    instead
+-   @ref PixelStorage::dataProperties(GL::PixelFormat, GL::PixelSize, const Vector3i&)
+    was deprecated for being too GL-specific, use @ref PixelStorage(std::size_t, const Vector3i&)
+    together with @ref GL::pixelSize() instead
 -   `setData()` functions in the @ref Image and @ref CompressedImage classes
     are deprecated because they don't offer anything extra over simple
     move-assignment of a new instance.
