@@ -34,6 +34,7 @@ if(CORRADE_TARGET_EMSCRIPTEN AND NOT TARGET_GLES2)
 endif()
 
 add_library(snippets-Magnum STATIC
+    Magnum.cpp
     plugins.cpp)
 target_link_libraries(snippets-Magnum PRIVATE Magnum)
 set_target_properties(snippets-Magnum PROPERTIES FOLDER "Magnum/doc/snippets")

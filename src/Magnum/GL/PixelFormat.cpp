@@ -26,9 +26,46 @@
 #include "PixelFormat.h"
 
 #include <Corrade/Utility/Assert.h>
+#include <Corrade/Containers/ArrayView.h>
 #include <Corrade/Utility/Debug.h>
 
+#include "Magnum/PixelFormat.h"
+
 namespace Magnum { namespace GL {
+
+namespace {
+
+constexpr struct {
+    GL::PixelFormat format;
+    GL::PixelType type;
+} FormatMapping[] {
+    #define _c(input, format, type) {GL::PixelFormat::format, GL::PixelType::type},
+    #include "Magnum/GL/Implementation/pixelFormatMapping.hpp"
+    #undef _c
+};
+
+}
+
+GL::PixelFormat pixelFormat(const Magnum::PixelFormat format) {
+    if(isPixelFormatImplementationSpecific(format))
+        return pixelFormatUnwrap<GL::PixelFormat>(format);
+
+    CORRADE_ASSERT(UnsignedInt(format) < Containers::arraySize(FormatMapping),
+        "GL::pixelFormat(): invalid value" << UnsignedInt(format), {});
+    return FormatMapping[UnsignedInt(format)].format;
+}
+
+GL::PixelType pixelType(const Magnum::PixelFormat format, const UnsignedInt extra) {
+    if(isPixelFormatImplementationSpecific(format)) {
+        CORRADE_ASSERT(extra,
+            "GL::pixelType(): format is implementation-specific, but no additional type specifier was passed", {});
+        return GL::PixelType(extra);
+    }
+
+    CORRADE_ASSERT(UnsignedInt(format) < Containers::arraySize(FormatMapping),
+        "GL::pixelType(): invalid value" << UnsignedInt(format), {});
+    return FormatMapping[UnsignedInt(format)].type;
+}
 
 std::size_t pixelSize(const PixelFormat format, const PixelType type) {
     std::size_t size = 0;
@@ -156,6 +193,13 @@ std::size_t pixelSize(const PixelFormat format, const PixelType type) {
 }
 
 #ifndef DOXYGEN_GENERATING_OUTPUT
+#ifdef MAGNUM_BUILD_DEPRECATED
+std::size_t pixelSize(const Magnum::PixelFormat format, const PixelType type) {
+    CORRADE_INTERNAL_ASSERT(isPixelFormatImplementationSpecific(format));
+    return pixelSize(pixelFormatUnwrap<PixelFormat>(format), type);
+}
+#endif
+
 Debug& operator<<(Debug& debug, const PixelFormat value) {
     switch(value) {
         /* LCOV_EXCL_START */
@@ -269,6 +313,25 @@ Debug& operator<<(Debug& debug, const PixelType value) {
     }
 
     return debug << "GL::PixelType(" << Debug::nospace << reinterpret_cast<void*>(GLenum(value)) << Debug::nospace << ")";
+}
+
+namespace {
+
+constexpr GL::CompressedPixelFormat CompressedFormatMapping[] {
+    #define _c(input, format) GL::CompressedPixelFormat::format,
+    #include "Magnum/GL/Implementation/compressedPixelFormatMapping.hpp"
+    #undef _c
+};
+
+}
+
+GL::CompressedPixelFormat compressedPixelFormat(const Magnum::CompressedPixelFormat format) {
+    if(isCompressedPixelFormatImplementationSpecific(format))
+        return compressedPixelFormatUnwrap<GL::CompressedPixelFormat>(format);
+
+    CORRADE_ASSERT(UnsignedInt(format) < Containers::arraySize(CompressedFormatMapping),
+        "GL::compressedPixelFormat(): invalid value", {});
+    return CompressedFormatMapping[UnsignedInt(format)];
 }
 
 Debug& operator<<(Debug& debug, const CompressedPixelFormat value) {

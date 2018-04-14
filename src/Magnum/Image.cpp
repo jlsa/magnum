@@ -25,11 +25,23 @@
 
 #include "Image.h"
 
+#include "Magnum/PixelFormat.h"
+
 namespace Magnum {
 
-template<UnsignedInt dimensions> Image<dimensions>::Image(PixelStorage storage, GL::PixelFormat format, GL::PixelType type, const VectorTypeFor<dimensions, Int>& size, Containers::Array<char>&& data) noexcept: _storage{storage}, _format{format}, _type{type}, _size{size}, _data{std::move(data)} {
+template<UnsignedInt dimensions> Image<dimensions>::Image(PixelStorage storage, PixelFormat format, const VectorTypeFor<dimensions, Int>& size, Containers::Array<char>&& data) noexcept: _storage{storage}, _format{format}, _formatExtra{}, _pixelSize{Magnum::pixelSize(format)}, _size{size}, _data{std::move(data)} {
     CORRADE_ASSERT(Implementation::imageDataSize(*this) <= _data.size(), "Image::Image(): bad image data size, got" << _data.size() << "but expected at least" << Implementation::imageDataSize(*this), );
 }
+
+template<UnsignedInt dimensions> Image<dimensions>::Image(PixelStorage storage, UnsignedInt format, UnsignedInt formatExtra, UnsignedInt pixelSize, const VectorTypeFor<dimensions, Int>& size, Containers::Array<char>&& data) noexcept: _storage{storage}, _format{pixelFormatWrap(format)}, _formatExtra{formatExtra}, _pixelSize{pixelSize}, _size{size}, _data{std::move(data)} {
+    CORRADE_ASSERT(Implementation::imageDataSize(*this) <= _data.size(), "Image::Image(): bad image data size, got" << _data.size() << "but expected at least" << Implementation::imageDataSize(*this), );
+}
+
+template<UnsignedInt dimensions> Image<dimensions>::Image(PixelStorage storage, PixelFormat format) noexcept: _storage{storage}, _format{format}, _formatExtra{}, _pixelSize{Magnum::pixelSize(format)}, _data{} {}
+
+template<UnsignedInt dimensions> CompressedImage<dimensions>::CompressedImage(const CompressedPixelStorage storage, const CompressedPixelFormat format, const VectorTypeFor<dimensions, Int>& size, Containers::Array<char>&& data) noexcept: _storage{storage}, _format{format}, _size{size}, _data{std::move(data)} {}
+
+template<UnsignedInt dimensions> CompressedImage<dimensions>::CompressedImage(CompressedPixelStorage storage, UnsignedInt format, const VectorTypeFor<dimensions, Int>& size, Containers::Array<char>&& data) noexcept: CompressedImage{storage, compressedPixelFormatWrap(format), size, std::move(data)} {}
 
 #ifndef DOXYGEN_GENERATING_OUTPUT
 template class MAGNUM_GL_EXPORT Image<1>;

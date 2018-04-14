@@ -60,6 +60,10 @@ ImageTest::ImageTest() {
               &ImageTest::releaseCompressed});
 }
 
+#error argh this needs to be moved to root
+
+// todo: test all overloads, test ambiguous overloads and fix them
+
 void ImageTest::construct() {
     auto data = new char[3*4];
     Image2D a{PixelStorage{}.setAlignment(1),
@@ -113,6 +117,8 @@ void ImageTest::constructMove() {
     CORRADE_COMPARE(b.type(), PixelType::UnsignedByte);
     CORRADE_COMPARE(b.size(), Vector2i(1, 3));
     CORRADE_COMPARE(b.data(), data);
+
+    // todo: test pixelsize move
 
     auto data2 = new char[12*4*2];
     Image2D c{PixelFormat::RGBA, PixelType::UnsignedShort, {2, 6}, Containers::Array<char>{data2, 12*4*2}};

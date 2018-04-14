@@ -177,6 +177,10 @@ See also:
     to the complexity of this change, no backwards compatibility is provided.
 -   The `magnum-info` utility was renamed to @ref magnum-gl-info. No backwards
     compatibility symlinks or aliases are provided.
+-   @ref ImageView and @ref CompressedImageView methods are no longer
+    @cpp constexpr @ce. It might be possible to have them @cpp constexpr @ce in
+    C++14, but the resulting increase in maintenance costs and compile times is
+    not worth it.
 -   Removed `PixelStorage::setSwapBytes()`, as every Magnum API dealing with
     images basically only asserted that it's not set. Use
     @ref Corrade::Utility::Endianness instead.

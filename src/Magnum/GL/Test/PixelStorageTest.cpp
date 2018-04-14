@@ -96,6 +96,8 @@ PixelStorageTest::PixelStorageTest() {
               });
 }
 
+#error argh this needs to be moved to root
+
 void PixelStorageTest::pixelSize() {
     CORRADE_COMPARE(PixelStorage::pixelSize(PixelFormat::RGBA, PixelType::UnsignedInt), 4*4);
     CORRADE_COMPARE(PixelStorage::pixelSize(PixelFormat::DepthComponent, PixelType::UnsignedShort), 2);

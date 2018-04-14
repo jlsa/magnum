@@ -697,6 +697,9 @@ typedef CompressedImageView<1> CompressedImageView1D;
 typedef CompressedImageView<2> CompressedImageView2D;
 typedef CompressedImageView<3> CompressedImageView3D;
 
+enum class PixelFormat: UnsignedInt;
+enum class CompressedPixelFormat: UnsignedInt;
+
 class PixelStorage;
 #ifndef MAGNUM_TARGET_GLES
 class CompressedPixelStorage;
@@ -770,9 +773,7 @@ typedef CORRADE_DEPRECATED("use GL::MultisampleTexture2D instead") GL::Multisamp
 typedef CORRADE_DEPRECATED("use GL::MultisampleTexture2DArray instead") GL::MultisampleTexture2DArray MultisampleTexture2DArray;
 #endif
 
-typedef CORRADE_DEPRECATED("use GL::PixelFormat instead") GL::PixelFormat PixelFormat;
 typedef CORRADE_DEPRECATED("use GL::PixelType instead") GL::PixelType PixelType;
-typedef CORRADE_DEPRECATED("use GL::CompressedPixelFormat instead") GL::CompressedPixelFormat CompressedPixelFormat;
 
 typedef CORRADE_DEPRECATED("use GL::PrimitiveQuery instead") GL::PrimitiveQuery PrimitiveQuery;
 typedef CORRADE_DEPRECATED("use GL::SampleQuery instead") GL::SampleQuery SampleQuery;

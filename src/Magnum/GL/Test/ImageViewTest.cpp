@@ -50,6 +50,8 @@ ImageViewTest::ImageViewTest() {
               &ImageViewTest::setDataCompressed});
 }
 
+#error argh this needs to be moved to root
+
 void ImageViewTest::construct() {
     const char data[3*3]{};
     ImageView2D a{PixelStorage{}.setAlignment(1),

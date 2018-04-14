@@ -596,6 +596,47 @@ enum class PixelType: GLenum {
 };
 
 /**
+@brief Convert generic pixel format to OpenGL pixel format
+
+In case @ref isPixelFormatImplementationSpecific() returns @cpp false @ce for
+@p format, maps it to a corresponding OpenGL pixel format. In case
+@ref isPixelFormatImplementationSpecific() returns @cpp true @ce, assumes
+@p format stores OpenGL-specific pixel format and returns
+@ref pixelFormatUnwrap() cast to @ref GL::PixelFormat.
+@see @ref pixelType()
+*/
+GL::PixelFormat pixelFormat(Magnum::PixelFormat format);
+
+/**
+@brief Convert generic pixel type to OpenGL pixel type
+
+In case @ref isPixelFormatImplementationSpecific() returns @cpp false @ce for
+@p format, maps it to a corresponding OpenGL pixel type. In case
+@ref isPixelFormatImplementationSpecific() returns @cpp true @ce, assumes
+@p extra stores OpenGL-specific pixel type and returns it cast to
+@ref GL::PixelType.
+@see @ref pixelFormat()
+*/
+GL::PixelType pixelType(Magnum::PixelFormat format, UnsignedInt extra = 0);
+
+/**
+@brief Pixel size for given format/type combination (in bytes)
+
+@see @ref PixelStorage::dataProperties()
+*/
+MAGNUM_GL_EXPORT std::size_t pixelSize(PixelFormat format, PixelType type);
+
+#if !defined(DOXYGEN_GENERATING_OUTPUT) && defined(MAGNUM_BUILD_DEPRECATED)
+MAGNUM_GL_EXPORT std::size_t pixelSize(Magnum::PixelFormat format, PixelType type);
+#endif
+
+/** @debugoperatorenum{PixelFormat} */
+MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, PixelFormat value);
+
+/** @debugoperatorenum{PixelType} */
+MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, PixelType value);
+
+/**
 @brief Format of compressed pixel data
 
 Equivalent to `Compressed*` values of @ref TextureFormat enum.
@@ -1235,17 +1276,16 @@ enum class CompressedPixelFormat: GLenum {
 };
 
 /**
-@brief Pixel size for given format/type combination (in bytes)
+@brief Convert generic compressed pixel format to OpenGL pixel format
 
-@see @ref PixelStorage::dataProperties()
+In case @ref isCompressedPixelFormatImplementationSpecific() returns
+@cpp false @ce for @p format, maps it to a corresponding OpenGL pixel format.
+In case @ref isCompressedPixelFormatImplementationSpecific() returns
+@cpp true @ce, assumes @p format stores OpenGL-specific pixel format and
+returns @ref compressedPixelFormatUnwrap() cast to @ref GL::CompressedPixelFormat.
+@see @ref pixelFormat()
 */
-MAGNUM_GL_EXPORT std::size_t pixelSize(PixelFormat format, PixelType type);
-
-/** @debugoperatorenum{PixelFormat} */
-MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, PixelFormat value);
-
-/** @debugoperatorenum{PixelType} */
-MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, PixelType value);
+GL::CompressedPixelFormat compressedPixelFormat(Magnum::CompressedPixelFormat format);
 
 /** @debugoperatorenum{CompressedPixelFormat} */
 MAGNUM_GL_EXPORT Debug& operator<<(Debug& debug, CompressedPixelFormat value);

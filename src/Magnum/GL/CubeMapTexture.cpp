@@ -74,7 +74,7 @@ void CubeMapTexture::image(const Int level, Image3D& image) {
 
     Buffer::unbindInternal(Buffer::TargetHint::PixelPack);
     Context::current().state().renderer->applyPixelStoragePack(image.storage());
-    glGetTextureImage(_id, level, GLenum(image.format()), GLenum(image.type()), data.size(), data);
+    glGetTextureImage(_id, level, GLenum(pixelFormat(image.format())), GLenum(image.formatExtra()), data.size(), data);
     image = Image3D{image.storage(), image.format(), image.type(), size, std::move(data)};
 }
 
@@ -182,7 +182,7 @@ void CubeMapTexture::image(const CubeMapCoordinate coordinate, const Int level, 
 
     Buffer::unbindInternal(Buffer::TargetHint::PixelPack);
     Context::current().state().renderer->applyPixelStoragePack(image.storage());
-    (this->*Context::current().state().texture->getCubeImageImplementation)(coordinate, level, size, image.format(), image.type(), data.size(), data);
+    (this->*Context::current().state().texture->getCubeImageImplementation)(coordinate, level, size, pixelFormat(image.format()), pixelType(image.format(), image.formatExtra()), data.size(), data);
     image = Image2D{image.storage(), image.format(), image.type(), size, std::move(data)};
 }
 
@@ -298,7 +298,7 @@ CubeMapTexture& CubeMapTexture::setSubImage(const Int level, const Vector3i& off
 
     Buffer::unbindInternal(Buffer::TargetHint::PixelUnpack);
     Context::current().state().renderer->applyPixelStorageUnpack(image.storage());
-    (this->*Context::current().state().texture->cubeSubImage3DImplementation)(level, offset, image.size(), image.format(), image.type(), image.data(), image.storage());
+    (this->*Context::current().state().texture->cubeSubImage3DImplementation)(level, offset, image.size(), pixelFormat(image.format()), pixelType(image.format(), image.formatExtra()), image.data(), image.storage());
     return *this;
 }
 
@@ -335,7 +335,7 @@ CubeMapTexture& CubeMapTexture::setSubImage(const CubeMapCoordinate coordinate, 
     Buffer::unbindInternal(Buffer::TargetHint::PixelUnpack);
     #endif
     Context::current().state().renderer->applyPixelStorageUnpack(image.storage());
-    (this->*Context::current().state().texture->cubeSubImageImplementation)(coordinate, level, offset, image.size(), image.format(), image.type(), image.data()
+    (this->*Context::current().state().texture->cubeSubImageImplementation)(coordinate, level, offset, image.size(), pixelFormat(image.format()), pixelType(image.format(), image.formatExtra()), image.data()
         #ifdef MAGNUM_TARGET_GLES2
         + Magnum::Implementation::pixelStorageSkipOffset(image)
         #endif
@@ -361,7 +361,7 @@ CubeMapTexture& CubeMapTexture::setCompressedSubImage(const CubeMapCoordinate co
        to reset anything */
     Context::current().state().renderer->applyPixelStorageUnpack(image.storage());
     #endif
-    (this->*Context::current().state().texture->cubeCompressedSubImageImplementation)(coordinate, level, offset, image.size(), image.format(), image.data(), Magnum::Implementation::occupiedCompressedImageDataSize(image, image.data().size()));
+    (this->*Context::current().state().texture->cubeCompressedSubImageImplementation)(coordinate, level, offset, image.size(), compressedPixelFormat(image.format()), image.data(), Magnum::Implementation::occupiedCompressedImageDataSize(image, image.data().size()));
     return *this;
 }
 
@@ -509,7 +509,7 @@ void CubeMapTexture::subImageImplementationDefault(const GLint level, const Vect
 }
 
 void CubeMapTexture::subImageImplementationSvga3DSliceBySlice(const GLint level, const Vector3i& offset, const Vector3i& size, const PixelFormat format, const PixelType type, const GLvoid* const data, const PixelStorage& storage) {
-    const std::size_t stride = std::get<1>(storage.dataProperties(format, type, size)).xy().product();
+    const std::size_t stride = std::get<1>(storage.dataProperties(pixelSize(format, type), size)).xy().product();
     for(Int i = 0; i != size.z(); ++i)
         subImageImplementationDefault(level, {offset.xy(), offset.z() + i}, {size.xy(), 1}, format, type, static_cast<const char*>(data) + stride*i, storage);
 }
